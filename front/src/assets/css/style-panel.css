@@ -1,0 +1,147 @@
+/* Header y Navbar */
+.admin-header {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-logo img {
+    max-height: 40px;
+    margin-right: 10px;
+  }
+  
+  .admin-logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #003366;
+    font-weight: bold;
+  }
+  
+  .admin-navbar a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .admin-navbar a:hover {
+    color: #28a745;
+  }
+  
+  .admin-icons i,
+  .admin-icons a {
+    margin-left: 10px;
+    color: #333;
+    font-size: 18px;
+  }
+  
+  /* Contenedor del panel de administración */
+  .admin-container {
+    max-width: 1200px;
+    margin: 90px auto 20px;  /* Aumentar el margen superior (90px) para separar más del header */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .admin-container h2 {
+    text-align: center;
+    color: #28a745;
+    margin-bottom: 40px;
+  }
+  
+  /* Contenedor para los formularios */
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .form-box {
+    flex: 1;
+    background-color: #28a745;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-box h3 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .form-box img {
+    display: block;
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+  }
+  
+  .form-box select,
+  .form-box input,
+  .form-box textarea,
+  .form-box button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .form-box select,
+  .form-box input,
+  .form-box textarea {
+    border: 1px solid #ccc;
+  }
+  
+  .form-box button {
+    background-color: #003366;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-box button:hover {
+    background-color: #002244;
+  }
+  
+  /* Estilo para los botones de acción (Eliminar, Limpiar) */
+  .form-box button#eliminar-plato,
+  .form-box button#limpiar-formulario {
+    background-color: #dc3545;
+  }
+  
+  .form-box button#eliminar-plato:hover,
+  .form-box button#limpiar-formulario:hover {
+    background-color: #c82333;
+  }
+  
+  /* Estilos para la sección de imágenes */
+  .form-box img {
+    border-radius: 10px;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .form-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .form-box {
+      flex: none;
+      width: 100%;
+    }
+  
+    .admin-container {
+      margin: 20px;
+      padding: 15px;
+    }
+  }
+  

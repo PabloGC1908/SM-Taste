@@ -9,6 +9,7 @@ import AboutUs from "./components/AboutUs";
 import Login from "./components/Login";
 import Carrito from "./components/Carrito";
 import DetalleCompra from "./components/DetalleCompra";
+import PanelAdmin from "./components/PanelAdmin";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Carrito />} />
         <Route path="/detalle-compra" element={<DetalleCompra />} />
+        <Route path="/panel-adm" element={<PanelAdmin />} />
       </Routes>
       <Footer />
     </Router>

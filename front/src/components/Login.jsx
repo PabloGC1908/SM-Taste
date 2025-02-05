@@ -11,8 +11,8 @@ const Login = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (email === "admin@example.com" && password === "admin123") {
-        navigate("/dashboard"); // Redirige a un dashboard después de iniciar sesión
+      if (email === "admin@gmail.com" && password === "12345") {
+        navigate("/panel-adm"); 
       } else {
         setErrorMessage("Correo o contraseña incorrectos.");
       }

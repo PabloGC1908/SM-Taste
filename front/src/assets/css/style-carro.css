@@ -1,0 +1,153 @@
+.cart-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-header a {
+    color: #003366;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.cart-header a:hover {
+    color: #28a745;
+}
+
+.cart-header h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.cart-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cart-items {
+    flex: 0.7;
+    margin-right: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 5px;
+}
+
+.item-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.item-info h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.item-info p {
+    margin: 5px 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.item-info span {
+    display: block;
+    color: #555;
+    font-size: 12px;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+}
+
+.item-controls input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.item-controls button {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item-controls button:hover {
+    background-color: #c82333;
+}
+
+.cart-summary {
+    flex: 0.3;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.summary-total {
+    font-size: 20px;
+    color: #28a745;
+}
+
+.summary-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.summary-button button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.summary-button button:hover {
+    background-color: #218838;
+}

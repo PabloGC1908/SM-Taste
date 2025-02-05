@@ -7,6 +7,7 @@ import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
 import Login from "./components/Login";
+import Carrito from "./components/Carrito";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Carrito />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,0 +1,92 @@
+/* Añadir un margen superior al contenido principal */
+.detalle-compras-container {
+    margin-top: 80px;  /* Ajusta el valor según la altura de tu header */
+}
+
+/* Si el header es fijo, puede ser necesario darle un padding al contenido */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff; /* Color de fondo del header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+}
+
+/* Esto es opcional, si tu header es fijo y quieres que no cubra contenido */
+body {
+    padding-top: 80px;  /* Añadir espacio superior para evitar que el header cubra el contenido */
+}
+
+/* Botones en grupo */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-group button {
+    padding: 15px 30px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-group button:hover {
+    background-color: #555;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Inicialmente, el modal está oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal.open {
+    display: flex; /* Mostrar el modal cuando se abre */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .modal-content img {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

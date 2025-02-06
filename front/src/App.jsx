@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Carrito from "./components/Carrito";
 import DetalleCompra from "./components/DetalleCompra";
 import PanelAdmin from "./components/PanelAdmin";
+import ConfirmationPage from "./components/ConfirmationPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/cart" element={<Carrito />} />
         <Route path="/detalle-compra" element={<DetalleCompra />} />
         <Route path="/panel-adm" element={<PanelAdmin />} />
+        <Route path="/confirmation" element={<ConfirmationPage />} />
       </Routes>
       <Footer />
     </Router>

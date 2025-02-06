@@ -97,3 +97,55 @@ h2 {
     cursor: pointer;
     color: #888;
 }
+
+.felicidades-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+.felicidades-message {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 80%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.felicidades-message h2 {
+    font-size: 2.5rem; /* Letras más grandes */
+    color: #28a745;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.felicidades-message p {
+    font-size: 1.5rem; /* Aumenta el tamaño de la descripción */
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+.felicidades-message button {
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.felicidades-message button:hover {
+    background-color: #218838;
+}

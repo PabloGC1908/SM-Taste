@@ -9,7 +9,7 @@ Se busca optimizar la experiencia del usuario, reducir tiempos de espera y facil
 ## 🏗️ Vista General de la Arquitectura  
 A continuación, se presenta la arquitectura general del sistema:  
 
-![Vista General de la Arquitectura](ModeloDominio.png)  
+![Vista General de la Arquitectura](Arquitectura-G4.png)  
 
 ## 👨‍💻 Autores  
 - **Fredy Anthony Huerta Firma**  

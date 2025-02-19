@@ -1,34 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
 import '../assets/css/style.css';
 import '../assets/css/style-detalle-compras.css';
+
+// Ícono personalizado para el marcador
+const customIcon = new L.Icon({
+    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+});
 
 const DetalleCompra = () => {
     // Estado para la información de la compra
     const [orderDetails, setOrderDetails] = useState({
-        deliveryAddress: '',
+        deliveryAddress: 'Universidad Nacional Mayor de San Marcos, Lima, Perú',
         paymentMethod: '',
         totalProductCost: 0,
         shippingCost: 3.00,
         totalCost: 0,
     });
 
+    const [position, setPosition] = useState([-12.0586, -77.0840]); // UNMSM
     const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
     useEffect(() => {
-        // Obtener los detalles del carrito desde el localStorage
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         const totalProductCost = carrito.reduce((total, item) => total + item.price * item.quantity, 0);
         const totalCost = totalProductCost + orderDetails.shippingCost;
 
-        // Actualizar los detalles de la compra
-        setOrderDetails({
-            ...orderDetails,
+        setOrderDetails(prevState => ({
+            ...prevState,
             totalProductCost,
             totalCost,
-        });
-    }, [orderDetails.shippingCost]); // Recalcular cuando el costo de envío cambie
+        }));
+    }, [orderDetails.shippingCost]);
 
+    // Función para buscar coordenadas a partir de una dirección
+    const fetchCoordinates = async (address) => {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+            const data = await response.json();
+
+            if (data.length > 0) {
+                const { lat, lon } = data[0];
+                setPosition([parseFloat(lat), parseFloat(lon)]);
+            } else {
+                alert("Dirección no encontrada. Intenta ser más específico.");
+            }
+        } catch (error) {
+            console.error("Error obteniendo coordenadas:", error);
+        }
+    };
+
+    // Manejar cambio de dirección y buscar coordenadas
+    const handleAddressChange = (e) => {
+        const newAddress = e.target.value;
+        setOrderDetails({ ...orderDetails, deliveryAddress: newAddress });
+    };
+
+    // Confirmar dirección y buscar coordenadas
+    const handleConfirmAddress = () => {
+        fetchCoordinates(orderDetails.deliveryAddress);
+    };
+
+    // Manejar método de pago
     const handlePaymentMethodChange = (e) => {
         setOrderDetails({
             ...orderDetails,
@@ -36,41 +75,45 @@ const DetalleCompra = () => {
         });
     };
 
+    // Confirmar pedido
     const handleConfirmOrder = () => {
-        // Lógica para confirmar la compra y redirigir según el método de pago
         if (orderDetails.paymentMethod === 'contra_entrega') {
-            setIsOrderConfirmed(true); // Mostrar mensaje de felicitación
+            setIsOrderConfirmed(true);
         } else if (orderDetails.paymentMethod === 'yape' || orderDetails.paymentMethod === 'plin') {
-            window.location.href = '/confirmation'; // Redirigir si el método es "Yape" o "Plin"
+            window.location.href = '/confirmation';
         } else {
             alert("Selecciona un método de pago válido");
         }
-        localStorage.clear(); // Limpiar el carrito después de la compra
+        localStorage.clear();
     };
 
     return (
         <div className="detalle-compras-container">
             {isOrderConfirmed ? (
                 <div className="felicidades-container">
-                <div className="felicidades-message">
-                    <h2>¡Felicidades por tu compra!</h2>
-                    <p>Tu pedido ha sido confirmado y pronto recibirás la entrega. ¡Gracias por elegirnos!</p>
-                    <button onClick={() => window.location.href = '/home'}>Volver al inicio</button>
-                </div>
+                    <div className="felicidades-message">
+                        <h2>¡Felicidades por tu compra!</h2>
+                        <p>Tu pedido ha sido confirmado y pronto recibirás la entrega. ¡Gracias por elegirnos!</p>
+                        <button onClick={() => window.location.href = '/home'}>Volver al inicio</button>
+                    </div>
                 </div>
             ) : (
                 <>
                     {/* Sección de entrega */}
                     <div className="detalle-entrega">
                         <h2>Entrega</h2>
-                        <div id="map">
-                            {/* Puedes agregar el mapa o la información de la entrega aquí */}
-                        </div>
+                        <MapContainer center={position} zoom={15} style={{ height: "300px", width: "100%" }}>
+                            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                            <Marker position={position} icon={customIcon}>
+                                <Popup>{orderDetails.deliveryAddress}</Popup>
+                            </Marker>
+                        </MapContainer>
                         <textarea
                             placeholder="Escribe la dirección de entrega aquí..."
                             value={orderDetails.deliveryAddress}
-                            onChange={(e) => setOrderDetails({ ...orderDetails, deliveryAddress: e.target.value })}
+                            onChange={handleAddressChange}
                         />
+                        <button onClick={handleConfirmAddress}>Confirmar dirección</button>
                     </div>
 
                     {/* Sección de método de pago */}

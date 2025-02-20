@@ -39,52 +39,5 @@ public class ProductoService {
         }
     }
 
-    public List<ProductoMenuResponse> findAllProductosMenu() {
-        List<Object[]> productos = productoRepository.findAllProductosMenu();
-        return productos.stream().map(
-                producto -> new ProductoMenuResponse(
-                        (Integer) producto[0],
-                        (String) producto[1],
-                        (String) producto[2],
-                        (String) producto[3],
-                        (Integer) producto[4],
-                        (Float) producto[5]
-                )
-        ).toList();
-    }
 
-    public Producto saveProducto(ProductoMenuResponse producto) {
-        if (producto.nombre() == null || producto.precio() <= 0) {
-            throw new IllegalArgumentException("Nombre o precio del producto no válidos.");
-        }
-
-        Producto newProducto = new Producto();
-        newProducto.setNombre(producto.nombre());
-        newProducto.setDescripcion(producto.descripcion());
-        newProducto.setPrecio(producto.precio());
-        newProducto.setCantidad(producto.cantidad());
-        newProducto.setUrl_foto(producto.urlImagen());
-
-        return productoRepository.save(newProducto);
-    }
-
-    public Producto updateProducto(Long id, ProductoMenuResponse productoDetails) {
-        Optional<Producto> optionalProducto = productoRepository.findById(id);
-        if (optionalProducto.isPresent()) {
-            log.info("Se encontro el producto, actualizandolo");
-            Producto producto = optionalProducto.get();
-            producto.setNombre(productoDetails.nombre());
-            producto.setDescripcion(productoDetails.descripcion());
-            producto.setCantidad(productoDetails.cantidad());
-            producto.setPrecio(productoDetails.precio());
-            producto.setUrl_foto(productoDetails.urlImagen());
-            return productoRepository.save(producto);
-        }
-        throw new RuntimeException("Producto no encontrado");
-    }
-
-    public void deleteProducto(Long id) {
-
-        productoRepository.deleteById(id);
-    }
 }

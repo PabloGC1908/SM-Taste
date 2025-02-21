@@ -38,6 +38,35 @@ public class ProductoService {
             throw new RuntimeException("No se pudieron obtener los productos del carrito");
         }
     }
+        public List<ProductoMenuResponse> findAllProductosMenu() {
+        List<Object[]> productos = productoRepository.findAllProductosMenu();
+        return productos.stream().map(
+                producto -> new ProductoMenuResponse(
+                        (Integer) producto[0],
+                        (String) producto[1],
+                        (String) producto[2],
+                        (String) producto[3],
+                        (Integer) producto[4],
+                        (Float) producto[5]
+                )
+        ).toList();
+    }
+
+    public Producto saveProducto(ProductoMenuResponse producto) {
+        if (producto.nombre() == null || producto.precio() <= 0) {
+            throw new IllegalArgumentException("Nombre o precio del producto no válidos.");
+        }
+
+        Producto newProducto = new Producto();
+        newProducto.setNombre(producto.nombre());
+        newProducto.setDescripcion(producto.descripcion());
+        newProducto.setPrecio(producto.precio());
+        newProducto.setCantidad(producto.cantidad());
+        newProducto.setUrl_foto(producto.urlImagen());
+
+        return productoRepository.save(newProducto);
+    }
+
 
 
 }

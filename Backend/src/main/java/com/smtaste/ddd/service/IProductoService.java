@@ -81,4 +81,9 @@ public class ProductoService {
         }
         throw new RuntimeException("Producto no encontrado");
     }
+
+    public void deleteProducto(Long id) {
+
+        productoRepository.deleteById(id);
+    }
 }

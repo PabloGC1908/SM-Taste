@@ -67,6 +67,18 @@ public class ProductoService {
         return productoRepository.save(newProducto);
     }
 
-
-
+    public Producto updateProducto(Long id, ProductoMenuResponse productoDetails) {
+        Optional<Producto> optionalProducto = productoRepository.findById(id);
+        if (optionalProducto.isPresent()) {
+            log.info("Se encontro el producto, actualizandolo");
+            Producto producto = optionalProducto.get();
+            producto.setNombre(productoDetails.nombre());
+            producto.setDescripcion(productoDetails.descripcion());
+            producto.setCantidad(productoDetails.cantidad());
+            producto.setPrecio(productoDetails.precio());
+            producto.setUrl_foto(productoDetails.urlImagen());
+            return productoRepository.save(producto);
+        }
+        throw new RuntimeException("Producto no encontrado");
+    }
 }

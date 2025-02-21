@@ -1,7 +1,13 @@
 package com.smtaste.ddd.domain.producto;
 
-public interface IProductoRepository {
-    String obtenerProducto(int id);
-    String listarProductos();
-    String detalles();
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface IProductoRepository extends JpaRepository<Producto, Integer> {
+    Optional<Producto> findById(Integer id); // Buscar un producto por ID
+    List<Producto> findAll();  // Listar todos los productos
 }

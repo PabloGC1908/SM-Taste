@@ -1,32 +1,26 @@
 package com.smtaste.ddd.domain.usuario;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "pedido")
-public class Pedido {
+@Table(name = "tarjeta_credito")
+public class Tarjeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String estado;
-    private String fechaPago;
-    private String ubicacion;
-    private Double precio;
-    @OneToMany(mappedBy = "pedido")
-    @JsonIgnore
-    private List<ProductoPedido> pedidos;
+    private String nombreTarjeta;
+    private String clave;
+    private String cvv;
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
 }

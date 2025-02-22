@@ -1,4 +1,5 @@
 package com.smtaste.ddd.domain.usuario;
 
-public class UsuarioServicioDominio {
+public enum Rol {
+    USER, ADMIN
 }

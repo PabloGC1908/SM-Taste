@@ -1,7 +1,6 @@
 package com.smtaste.ddd.presentation;
 
 import com.smtaste.ddd.domain.producto.Producto;
-import com.smtaste.ddd.domain.producto.ProductoServicioDominio;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

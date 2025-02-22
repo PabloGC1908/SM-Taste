@@ -1,65 +1,36 @@
 package com.smtaste.ddd.domain.producto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.smtaste.ddd.domain.usuario.ProductoPedido;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Table
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "producto")
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String nombreProducto;
-    private String descripcionProducto;
+    private Integer id;
+    private String nombre;
+    private String url_foto;
+    private String descripcion;
     private String categoria;
-    private float precio;
-    private int cantidad;
-
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
-
-    public String getDescripcionProducto() {
-        return descripcionProducto;
-    }
-
-    public void setDescripcionProducto(String descripcionProducto) {
-        this.descripcionProducto = descripcionProducto;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+    private Float precio;
+    private Integer cantidad;
+    @OneToMany(mappedBy = "producto")
+    @JsonIgnore
+    private List<ProductoPedido> productos;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_restaurante")
+    @JsonIgnore
+    private Restaurante restaurante;
 }

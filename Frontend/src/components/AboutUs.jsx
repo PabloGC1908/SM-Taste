@@ -1,18 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../assets/css/style.css";
 
 const AboutUs = () => (
     <>
       {/* Acerca de Nosotros starts */}
       <section className="about" id="about">
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
-        <h1 className="sub-heading"></h1>
         <div className="title-cards">
           <h1 className="heading">Acerca de Nosotros</h1>
         </div>

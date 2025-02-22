@@ -1,14 +1,14 @@
-package com.smtaste.restaurant.service;
+package com.smtaste.ddd.service;
 
-import com.smtaste.restaurant.dto.ProductoCarritoDto;
-import com.smtaste.restaurant.dto.ProductoMenuResponse;
-import com.smtaste.restaurant.model.Producto;
-import com.smtaste.restaurant.repository.ProductoRepository;
+import com.smtaste.ddd.dto.ProductoCarritoDto;
+import com.smtaste.ddd.dto.ProductoMenuResponse;
+import com.smtaste.ddd.infrastructure.repository.ProductoRepository;
+import com.smtaste.ddd.model.Producto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -34,7 +34,7 @@ public class ProductoService {
                             (Float) producto[5]
                     )).toList();
         } catch (IllegalStateException e) {
-            log.error("Error al obtener productos del carrito", e);
+           // log.info("Error al obtener productos del carrito", e);
             throw new RuntimeException("No se pudieron obtener los productos del carrito");
         }
     }
@@ -70,7 +70,7 @@ public class ProductoService {
     public Producto updateProducto(Long id, ProductoMenuResponse productoDetails) {
         Optional<Producto> optionalProducto = productoRepository.findById(id);
         if (optionalProducto.isPresent()) {
-            log.info("Se encontro el producto, actualizandolo");
+            //log.info("Se encontro el producto, actualizandolo");
             Producto producto = optionalProducto.get();
             producto.setNombre(productoDetails.nombre());
             producto.setDescripcion(productoDetails.descripcion());

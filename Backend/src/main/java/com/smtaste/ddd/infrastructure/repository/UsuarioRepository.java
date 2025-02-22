@@ -1,7 +1,16 @@
 package com.smtaste.ddd.infrastructure.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
-@Repository
-public class UsuarioRepository {
+import com.smtaste.ddd.model.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+
+    Optional<com.smtaste.ddd.model.Usuario> findByEmail(String email);
+
+    @Query("SELECT u.nombre FROM Usuario u WHERE u.email = :email AND u.contrasena = :contrasena")
+    Optional<String> findByLogin(@Param("email") String email, @Param("contraseña") String contrasena);
 }

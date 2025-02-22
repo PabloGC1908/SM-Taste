@@ -1,7 +1,5 @@
-package com.smtaste.restaurant.service;
-
-import com.smtaste.restaurant.repository.UsuarioRepository;
-import com.smtaste.restaurant.security.auth.AuthRequest;
+import com.smtaste.ddd.auth.AuthRequest;
+import com.smtaste.ddd.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

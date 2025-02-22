@@ -1,8 +1,8 @@
 package com.smtaste.ddd.model;
 
-import com.smtaste.ddd.infrastructure.repository.domain.usuario.Pedido;
-import com.smtaste.ddd.infrastructure.repository.domain.usuario.Rol;
-import com.smtaste.ddd.infrastructure.repository.domain.usuario.Tarjeta;
+import com.smtaste.ddd.domain.usuario.Pedido;
+import com.smtaste.ddd.domain.usuario.Rol;
+import com.smtaste.ddd.domain.usuario.Tarjeta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

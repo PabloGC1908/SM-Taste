@@ -1,13 +1,8 @@
 package com.smtaste.ddd.infrastructure.repository;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import com.smtaste.ddd.model.Producto;
-=======
-import com.smtaste.ddd.domain.producto.Producto;
-import java.util.List;
->>>>>>> develop
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

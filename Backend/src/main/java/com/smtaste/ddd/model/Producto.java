@@ -1,8 +1,8 @@
 package com.smtaste.ddd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smtaste.ddd.infrastructure.repository.domain.producto.Restaurante;
-import com.smtaste.ddd.infrastructure.repository.domain.usuario.ProductoPedido;
+import com.smtaste.ddd.domain.producto.Restaurante;
+import com.smtaste.ddd.domain.usuario.ProductoPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,3 +1,4 @@
+package com.smtaste.ddd.service;
 import com.smtaste.ddd.auth.AuthRequest;
 import com.smtaste.ddd.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;

@@ -10,12 +10,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-    @Query("SELECT p.id_Producto, p.nombre_Producto, p.descripcion_Producto, r.nombre, p.precio "
-            + "FROM Producto p "
-            + "JOIN Restaurante r "
-            + "WHERE p.id IN :ids")
+    @Query("SELECT p.id, p.nombre, p.url_foto , p.descripcion, r.nombre, p.precio " +
+            "FROM Producto p JOIN p.restaurante r " +
+            "WHERE p.id IN :ids")
     List<Object[]> findAllProductoCarrito(@Param("ids") List<Long> ids);
 
-    @Query("SELECT p.id_Producto, p.nombre_Producto, p.descripcion_Producto, p.cantidad, p.precio FROM Producto p")
+    @Query("SELECT p.id, p.nombre, p.url_foto, p.descripcion, p.cantidad, p.precio FROM Producto p")
     List<Object[]> findAllProductosMenu();
 }

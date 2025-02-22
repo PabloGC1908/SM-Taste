@@ -1,9 +1,19 @@
 package com.smtaste.ddd.domain.producto;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Table
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "restaurante")
 public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,4 +21,8 @@ public class Restaurante {
     private String nombre;
     private String descripcion;
     private String ubicacion;
+    private String imagen;
+    private String qr_pago;
+    @OneToMany(mappedBy = "restaurante")
+    private List<Producto> productos;
 }

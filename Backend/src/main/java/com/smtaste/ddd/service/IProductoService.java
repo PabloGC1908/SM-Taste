@@ -1,7 +1,6 @@
 package com.smtaste.ddd.service;
 
 import com.smtaste.ddd.domain.producto.Producto;
-import com.smtaste.ddd.domain.producto.ProductoServicioDominio;
 
 import java.util.List;
 

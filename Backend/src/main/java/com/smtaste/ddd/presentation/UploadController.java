@@ -25,11 +25,14 @@ public class UploadController {
 
     private String saveFileAndGetUrl(MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        Path path = Paths.get("uploads/" + fileName);
+        Path path = Paths.get("uploads").resolve(fileName);
+
         try {
+            // Crear la carpeta si no existe
+            Files.createDirectories(path.getParent());
             Files.copy(file.getInputStream(), path);
         } catch (IOException e) {
-            e.printStackTrace();
+            return "Error al guardar el archivo";
         }
         return "http://localhost:8080/uploads/" + fileName;
     }

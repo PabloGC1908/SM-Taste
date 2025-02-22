@@ -1,36 +1,22 @@
 package com.smtaste.ddd.domain.producto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smtaste.ddd.domain.usuario.ProductoPedido;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+@Table
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "producto")
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nombre;
-    private String url_foto;
-    private String descripcion;
+    private int id;
+    private String nombreProducto;
+    private String descripcionProducto;
     private String categoria;
-    private Float precio;
-    private Integer cantidad;
-    @OneToMany(mappedBy = "producto")
-    @JsonIgnore
-    private List<ProductoPedido> productos;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_restaurante")
-    @JsonIgnore
-    private Restaurante restaurante;
+    private float precio;
+    private int cantidad;
 }

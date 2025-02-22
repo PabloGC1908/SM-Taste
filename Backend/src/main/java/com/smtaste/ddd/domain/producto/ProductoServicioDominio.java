@@ -7,13 +7,11 @@ import java.util.List;
 public class ProductoServicioDominio {
     private final IProductoRepository productoRepository;
 
-    // Inyección de dependencia
     public ProductoServicioDominio(IProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
     }
 
-    // Método corregido para listar productos
-    public List<Producto> encontrarProducto() {
-        return productoRepository.findAll(); // Se cambia listarProductos() por findAll()
+    public List<Producto> encontrarProductos() {
+        return productoRepository.findAll();
     }
 }

@@ -1,25 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/css/style.css'; 
-import '../assets/css/style-carro.css'; 
+import '../assets/css/style.css';
+import '../assets/css/style-carro.css';
 
 const Carrito = () => {
-    // Estado para los elementos del carrito
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: "Producto 1", price: 20.00, quantity: 2, imageUrl: "https://via.placeholder.com/50" },
-        { id: 2, name: "Producto 2", price: 15.00, quantity: 1, imageUrl: "https://via.placeholder.com/50" },
-        { id: 3, name: "Producto 3", price: 50.00, quantity: 1, imageUrl: "https://via.placeholder.com/50" },
-    ]);
+    const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const shippingCost = 3.00;
 
-    // Calcular el costo total
-    const calculateTotal = () => {
-        const totalProductCost = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        const shippingCost = 3.00; // Costo fijo de envío
-        const totalCost = totalProductCost + shippingCost;
-        return { totalProductCost, shippingCost, totalCost };
+    useEffect(() => {
+        recuperarItems();
+    }, []);
+
+    async function recuperarItems() {
+        const carritoItems = JSON.parse(localStorage.getItem('carrito')) || [];
+        try {
+            const response = await fetch('http://localhost:8080/api/carrito', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carritoItems)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+    
+            const responseData = await response.json();
+            console.log("Respuesta de la API:", responseData);
+    
+            if (!Array.isArray(responseData)) {
+                throw new Error("La respuesta de la API no es un array");
+            }
+    
+            setCartItems(responseData);
+            calcularTotal(responseData);
+            localStorage.setItem('carrito', JSON.stringify(responseData));
+        } catch (error) {
+            console.error("Error al recuperar el carrito:", error);
+            setCartItems([]); // Evita que cartItems sea undefined
+        }
+    }
+
+    const calcularTotal = (items) => {
+        const total = items.reduce((acc, item) => acc + item.precio * (item.cantidad || 1), 0);
+        setTotalPrice(total);
     };
 
-    const { totalProductCost, shippingCost, totalCost } = calculateTotal();
+    const actualizarCantidad = (id, cantidad) => {
+        const newCartItems = cartItems.map(item =>
+            item.id === id ? { ...item, cantidad } : item
+        );
+        setCartItems([...newCartItems]); // Genera un nuevo array para actualizar el estado
+        calcularTotal(newCartItems);
+        localStorage.setItem('carrito', JSON.stringify(newCartItems));
+    };
+
+    const eliminarItem = (id) => {
+        const newCartItems = cartItems.filter(item => item.id !== id);
+        setCartItems([...newCartItems]); // Genera un nuevo array para actualizar el estado
+        calcularTotal(newCartItems);
+        localStorage.setItem('carrito', JSON.stringify(newCartItems));
+    };
 
     return (
         <div className="cart-container">
@@ -35,27 +78,22 @@ const Carrito = () => {
                     ) : (
                         cartItems.map(item => (
                             <div key={item.id} className="cart-item">
-                                <img src={item.imageUrl} alt={item.name} />
+                                <img src={item.urlImagen} alt={item.nombre} />
                                 <div className="item-info">
-                                    <h3>{item.name}</h3>
-                                    <p>S/. {item.price.toFixed(2)}</p>
-                                    <span>Cantidad: {item.quantity}</span>
+                                    <h3>{item.nombre}</h3>
+                                    <p>{item.descripcion}</p>
+                                    <span style={{ color: 'green', fontWeight: 'bold', fontSize: '1.2em' }}>
+                                        S/. {item.precio.toFixed(2)}
+                                    </span>
                                 </div>
                                 <div className="item-controls">
                                     <input
                                         type="number"
                                         min="1"
-                                        value={item.quantity}
-                                        onChange={(e) => {
-                                            const newCartItems = cartItems.map(cartItem =>
-                                                cartItem.id === item.id ? { ...cartItem, quantity: parseInt(e.target.value) } : cartItem
-                                            );
-                                            setCartItems(newCartItems);
-                                        }}
+                                        value={item.cantidad || 1}
+                                        onChange={(e) => actualizarCantidad(item.id, parseInt(e.target.value))}
                                     />
-                                    <button onClick={() => {
-                                        setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));
-                                    }}>Eliminar</button>
+                                    <button onClick={() => eliminarItem(item.id)}>Eliminar</button>
                                 </div>
                             </div>
                         ))
@@ -66,7 +104,7 @@ const Carrito = () => {
                     <h3>Resumen</h3>
                     <div className="summary-item">
                         <span>Costo De Los Productos:</span>
-                        <span>S/. {totalProductCost.toFixed(2)}</span>
+                        <span>S/. {totalPrice.toFixed(2)}</span>
                     </div>
                     <div className="summary-item">
                         <span>Costo De Envío:</span>
@@ -74,7 +112,7 @@ const Carrito = () => {
                     </div>
                     <div className="summary-total summary-item">
                         <span>TOTAL:</span>
-                        <span>S/. {totalCost.toFixed(2)}</span>
+                        <span>S/. {(totalPrice + shippingCost).toFixed(2)}</span>
                     </div>
                     <div className="summary-button">
                         <Link to="/detalle-compra" className="btn">Continuar</Link>

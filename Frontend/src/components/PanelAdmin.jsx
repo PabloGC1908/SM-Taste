@@ -14,13 +14,18 @@ const PanelAdmin = () => {
     });
 
     useEffect(() => {
-        // Simulando la carga de platos
-        const platosData = [
-            { id: 1, nombre: 'Plato 1', precio: 20, cantidad: 5, descripcion: 'Deliciosa comida 1', imagen: 'https://via.placeholder.com/150' },
-            { id: 2, nombre: 'Plato 2', precio: 15, cantidad: 3, descripcion: 'Deliciosa comida 2', imagen: 'https://via.placeholder.com/150' },
-        ];
-        setPlatos(platosData);
+        fetchProductos();
     }, []);
+
+    const fetchProductos = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/productos');
+            const data = await response.json();
+            setPlatos(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
 
     const handlePlatoSelect = (e) => {
         const platoId = e.target.value;
@@ -30,45 +35,66 @@ const PanelAdmin = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNuevoPlato({
-            ...nuevoPlato,
-            [name]: value,
-        });
-    };
-
-    const handleNuevoPlatoSubmit = () => {
-        // Agregar nuevo plato (simulado)
-        setPlatos([...platos, { ...nuevoPlato, id: platos.length + 1, imagen: URL.createObjectURL(nuevoPlato.imagen) }]);
-        setNuevoPlato({ nombre: '', precio: '', cantidad: '', descripcion: '', imagen: null });
-    };
-
-    const handlePlatoUpdate = () => {
-        // Actualizar plato seleccionado
-        setPlatos(platos.map(plato => (plato.id === selectedPlato.id ? selectedPlato : plato)));
-    };
-
-    const handlePlatoDelete = () => {
-        // Eliminar plato seleccionado
-        setPlatos(platos.filter(plato => plato.id !== selectedPlato.id));
-        setSelectedPlato(null);
+        setNuevoPlato({ ...nuevoPlato, [name]: value });
     };
 
     const handleImagenChange = (e) => {
         const file = e.target.files[0];
-        setNuevoPlato({
-            ...nuevoPlato,
-            imagen: file,
+        setNuevoPlato({ ...nuevoPlato, imagen: file });
+    };
+
+    const handlePlatoUpdate = async () => {
+        if (!selectedPlato) return;
+        const response = await fetch(`http://localhost:8080/api/productos/${selectedPlato.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(selectedPlato),
         });
+        if (response.ok) {
+            alert('Producto actualizado correctamente');
+            fetchProductos();
+        } else {
+            alert('Error al actualizar producto');
+        }
+    };
+
+    const handlePlatoDelete = async () => {
+        if (!selectedPlato) return;
+        const response = await fetch(`http://localhost:8080/api/productos/${selectedPlato.id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            alert('Producto eliminado correctamente');
+            fetchProductos();
+            setSelectedPlato(null);
+        } else {
+            alert('Error al eliminar producto');
+        }
+    };
+
+    const handleNuevoPlatoSubmit = async () => {
+        if (!nuevoPlato.nombre || !nuevoPlato.precio) return;
+        const response = await fetch('http://localhost:8080/api/productos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nuevoPlato),
+        });
+        if (response.ok) {
+            alert('Producto añadido correctamente');
+            fetchProductos();
+            setNuevoPlato({ nombre: '', precio: '', cantidad: '', descripcion: '', imagen: null });
+        } else {
+            alert('Error al añadir producto');
+        }
     };
 
     return (
         <div className="admin-container">
             <h2>Menú del día</h2>
             <div className="form-container">
-                {/* Modificar Plato */}
                 <div className="form-box">
                     <h3>Modificar Plato</h3>
-                    <select id="select-plato" onChange={handlePlatoSelect} value={selectedPlato ? selectedPlato.id : ''}>
+                    <select onChange={handlePlatoSelect} value={selectedPlato ? selectedPlato.id : ''}>
                         <option value="">Seleccionar Plato</option>
                         {platos.map(plato => (
                             <option key={plato.id} value={plato.id}>{plato.nombre}</option>
@@ -76,85 +102,26 @@ const PanelAdmin = () => {
                     </select>
                     {selectedPlato && (
                         <>
-                            <img id="img-plato" src={selectedPlato.imagen} alt="Imagen del Plato" />
-                            <input type="file" id="imagen-plato-file" onChange={handleImagenChange} />
-                            <input
-                                type="text"
-                                id="nombre-plato"
-                                placeholder="Nombre del Plato"
-                                value={selectedPlato.nombre}
-                                onChange={(e) => setSelectedPlato({ ...selectedPlato, nombre: e.target.value })}
-                            />
-                            <input
-                                type="number"
-                                id="precio-plato"
-                                placeholder="Precio: S/.00"
-                                value={selectedPlato.precio}
-                                onChange={(e) => setSelectedPlato({ ...selectedPlato, precio: e.target.value })}
-                            />
-                            <input
-                                type="number"
-                                id="cantidad-plato"
-                                placeholder="Cantidad: 00"
-                                value={selectedPlato.cantidad}
-                                onChange={(e) => setSelectedPlato({ ...selectedPlato, cantidad: e.target.value })}
-                            />
-                            <textarea
-                                id="descripcion-plato"
-                                placeholder="Descripción"
-                                value={selectedPlato.descripcion}
-                                onChange={(e) => setSelectedPlato({ ...selectedPlato, descripcion: e.target.value })}
-                            />
-                            <button onClick={handlePlatoUpdate} id="actualizar-plato">Actualizar</button>
-                            <button onClick={handlePlatoDelete} id="eliminar-plato" style={{ backgroundColor: '#dc3545' }}>Eliminar</button>
+                            <input type="text" placeholder="Nombre" value={selectedPlato.nombre} 
+                                onChange={(e) => setSelectedPlato({ ...selectedPlato, nombre: e.target.value })} />
+                            <input type="number" placeholder="Precio" value={selectedPlato.precio} 
+                                onChange={(e) => setSelectedPlato({ ...selectedPlato, precio: e.target.value })} />
+                            <input type="number" placeholder="Cantidad" value={selectedPlato.cantidad} 
+                                onChange={(e) => setSelectedPlato({ ...selectedPlato, cantidad: e.target.value })} />
+                            <textarea placeholder="Descripción" value={selectedPlato.descripcion} 
+                                onChange={(e) => setSelectedPlato({ ...selectedPlato, descripcion: e.target.value })} />
+                            <button onClick={handlePlatoUpdate}>Actualizar</button>
+                            <button onClick={handlePlatoDelete} style={{ backgroundColor: '#dc3545' }}>Eliminar</button>
                         </>
                     )}
                 </div>
-
-                {/* Añadir Plato Nuevo */}
                 <div className="form-box">
                     <h3>Añadir Plato Nuevo</h3>
-                    <img id="img-nuevo" src="images/dish-2.png" alt="Plato Nuevo" />
-                    <input type="file" id="imagen-nuevo-file" onChange={(e) => setNuevoPlato({ ...nuevoPlato, imagen: e.target.files[0] })} />
-                    <input
-                        type="text"
-                        id="nombre-nuevo"
-                        placeholder="Nombre del Plato"
-                        name="nombre"
-                        value={nuevoPlato.nombre}
-                        onChange={handleInputChange}
-                    />
-                    <input
-                        type="number"
-                        id="precio-nuevo"
-                        placeholder="Precio: S/.00"
-                        name="precio"
-                        value={nuevoPlato.precio}
-                        onChange={handleInputChange}
-                    />
-                    <input
-                        type="number"
-                        id="cantidad-nuevo"
-                        placeholder="Cantidad: 00"
-                        name="cantidad"
-                        value={nuevoPlato.cantidad}
-                        onChange={handleInputChange}
-                    />
-                    <textarea
-                        id="descripcion-nuevo"
-                        placeholder="Agrega una Descripción"
-                        name="descripcion"
-                        value={nuevoPlato.descripcion}
-                        onChange={handleInputChange}
-                    />
-                    <button onClick={handleNuevoPlatoSubmit} id="añadir-plato">Añadir</button>
-                    <button
-                        onClick={() => setNuevoPlato({ nombre: '', precio: '', cantidad: '', descripcion: '', imagen: null })}
-                        id="limpiar-formulario"
-                        style={{ backgroundColor: '#dc3545' }}
-                    >
-                        Limpiar
-                    </button>
+                    <input type="text" placeholder="Nombre" name="nombre" value={nuevoPlato.nombre} onChange={handleInputChange} />
+                    <input type="number" placeholder="Precio" name="precio" value={nuevoPlato.precio} onChange={handleInputChange} />
+                    <input type="number" placeholder="Cantidad" name="cantidad" value={nuevoPlato.cantidad} onChange={handleInputChange} />
+                    <textarea placeholder="Descripción" name="descripcion" value={nuevoPlato.descripcion} onChange={handleInputChange} />
+                    <button onClick={handleNuevoPlatoSubmit}>Añadir</button>
                 </div>
             </div>
         </div>

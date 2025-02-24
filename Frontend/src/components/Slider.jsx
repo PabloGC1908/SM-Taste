@@ -46,7 +46,7 @@ const Slider = () => {
               <span>{slideItem.span}</span>
               <h3>{slideItem.h3}</h3>
               <p>{slideItem.p}</p>
-              <a href="#" className="btn">Pedir ahora</a>
+              <a href="/menu" className="btn">Pedir ahora</a>
             </div>
             <div className="image">
               <img src={slideItem.imgSrc} alt={slideItem.imgAlt} />

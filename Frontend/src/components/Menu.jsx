@@ -50,7 +50,7 @@ const Menu = () => {
                   src={`${producto.urlImagen}`} 
                   alt={producto.nombre}
                   className="product-image"
-                  onError={(e) => (e.target.src = "/images/default.png")} // Imagen por defecto si falla
+                  onError={(e) => (e.target.src = "/images/dish-4.png")} // Imagen por defecto si falla
                 />
               </div>
 

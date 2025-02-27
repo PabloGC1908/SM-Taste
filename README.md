@@ -21,3 +21,37 @@ A continuación, se presenta la arquitectura general del sistema:
 
 ![Vista General de la Arquitectura](Arquitectura-G4.png)  
   
+## Principales servicios REST y funcionalidades
+El proyecto sigue el formato estándar OpenAPI y utiliza Swagger como herramienta de documentación.
+
+- Módulo: Gestión de Restaurantes
+  - Operaciones disponibles:
+    - GET /restaurants/{id} - Obtiene la información de un restaurante por ID
+    - POST /restaurants - Crea un nuevo restaurante
+    - PUT /restaurants/{id} - Actualiza la información de un restaurante
+    - DELETE /restaurants/{id} - Elimina un restaurante
+
+Ejemplo de implementación de un controlador REST en Spring Boot:
+- Modelos
+  - Restaurant
+    
+  - Menu
+    
+  - User
+    
+## Prácticas de Desarrollo
+El proyecto sigue buenas prácticas de desarrollo para garantizar calidad y mantenibilidad:
+- Construcción Automática: Uso de Maven para la gestión de dependencias y construcción.
+- Análisis Estático: Integración de herramientas como SonarQube para identificar problemas en el código.
+- Pruebas Unitarias: Implementación de pruebas con JUnit.
+Ejemplo de prueba unitaria con JUnit:
+
+- Pruebas de APIs: Validación de endpoints con Postman o herramientas como RestAssured.
+  Ejemplo de prueba de API con RestAssured:
+## Pipeline de CI/CD en Jenkins
+El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
+- Construcción Automática: Compilación del código con Maven.
+- Análisis Estático: Evaluación del código con SonarQube.
+- Pruebas Unitarias: Ejecución de pruebas con JUnit.
+- Pruebas de APIs: Verificación de endpoints REST con herramientas automatizadas.
+Ejemplo de archivo Jenkinsfile:

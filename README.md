@@ -41,24 +41,25 @@ A continuación, se presenta la arquitectura general del sistema:
   
 ## Principales servicios REST y funcionalidades
 
-- Módulo: Gestión de Restaurantes
+- Módulo: Gestión de Productos
   - Operaciones disponibles:
-    - GET /restaurants/{id} - Obtiene la información de un restaurante por ID
-    - POST /restaurants - Crea un nuevo restaurante
-    - PUT /restaurants/{id} - Actualiza la información de un restaurante
-    - DELETE /restaurants/{id} - Elimina un restaurante
+    
+    ![image](https://github.com/user-attachments/assets/7003de77-5074-443f-9a47-9a2ba8f26d3f)
+    
+    ![image](https://github.com/user-attachments/assets/2a5c49b2-96ea-4814-ab20-ba542b439865)
 
-Ejemplo de implementación de un controlador REST en Spring Boot:
-- Modelos
-  - Restaurant
-  
-    ![image](https://github.com/user-attachments/assets/7fe7a4e5-4a31-4389-b56b-677afe2a99ba)
-  
-  - Producto
-  
-    ![image](https://github.com/user-attachments/assets/a90a9704-3490-4e15-86b5-783a5b81e726)
+  - Entidad Clave:
+    - Producto
+    
+      ![image](https://github.com/user-attachments/assets/a90a9704-3490-4e15-86b5-783a5b81e726)
 
-  - Usuario
+- Módulo: Gestión de Usuarios
+  - Operaciones disponibles:
+ 
+    ![image](https://github.com/user-attachments/assets/7b414d68-c59c-4ea8-af77-c9cf472283f4)
+
+  - Entidad Clave:
+    - Usuario
 
     ![image](https://github.com/user-attachments/assets/c3469118-1291-44a0-9e26-37d33baa5c91)
 
@@ -74,21 +75,11 @@ Ejemplo de prueba unitaria con JUnit:
 
 ![image](https://github.com/user-attachments/assets/b2a6fc8c-0f7d-4a8b-8ba6-0e6e6c04e28f)
 
-- Pruebas de APIs: Validación de endpoints con Postman o herramientas como RestAssured.
-Pruebas APIs RestAssured
-
-![image](https://github.com/user-attachments/assets/5860e9a4-3b62-4137-99cd-f52edad597c6)
+- Pruebas de APIs: Validación de endpoints con Postman
 
 Pruebas APIs Postman
 
 ![image](https://github.com/user-attachments/assets/4083f71c-425a-4ea6-8fd3-f4276710cc87)
-
-  Ejemplo de prueba de API con RestAssured:
-RestAssured
-
-![image](https://github.com/user-attachments/assets/b2a6fc8c-0f7d-4a8b-8ba6-0e6e6c04e28f)
-
-Postman
 
 ![image](https://github.com/user-attachments/assets/4ab186c2-e527-4545-a73c-ba514eb9564a)
 
@@ -96,6 +87,9 @@ Postman
 ## Pipeline de CI/CD en Jenkins
 El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
 - Construcción Automática: Compilación del código con Maven.
+
+![image](https://github.com/user-attachments/assets/2388b539-400d-4ed6-a49b-f667d46576e3)
+
 - Análisis Estático: Evaluación del código con SonarQube.
 
 ![image](https://github.com/user-attachments/assets/c4fc0cef-c995-4d59-8074-4081d3a190a9)
@@ -106,8 +100,6 @@ El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
 
 - Pruebas de APIs: Verificación de endpoints REST con herramientas automatizadas.
   
-
-Pruebas APIs:
   - Gestion de Productos
 
 ![image](https://github.com/user-attachments/assets/d89de255-5e58-4ff9-987c-5e45b5120e84)

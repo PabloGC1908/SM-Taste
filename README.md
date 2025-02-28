@@ -80,6 +80,25 @@ Postman
 El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
 - Construcción Automática: Compilación del código con Maven.
 - Análisis Estático: Evaluación del código con SonarQube.
+
+![image](https://github.com/user-attachments/assets/c4fc0cef-c995-4d59-8074-4081d3a190a9)
+  
 - Pruebas Unitarias: Ejecución de pruebas con JUnit.
+
+![image](https://github.com/user-attachments/assets/c3d95f31-695f-48ad-8c97-bf83692d2754)
+
 - Pruebas de APIs: Verificación de endpoints REST con herramientas automatizadas.
-Ejemplo de archivo Jenkinsfile:
+  
+![image](https://github.com/user-attachments/assets/1a175a1e-abaa-4d83-80af-8e9cb9f2af89)
+
+Pruebas APIs:
+  - Gestion de Productos
+
+![image](https://github.com/user-attachments/assets/d89de255-5e58-4ff9-987c-5e45b5120e84)
+
+![image](https://github.com/user-attachments/assets/b6131f48-7aae-4d50-8bb8-1a4f704ddd00)
+
+    
+  - Gestion de Usuarios
+
+![image](https://github.com/user-attachments/assets/1ce4327a-648c-452a-9733-c353acf75bed)

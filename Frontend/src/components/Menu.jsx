@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "../assets/css/style.css";
 
 const Menu = () => {
@@ -7,7 +7,7 @@ const Menu = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/productos")
+    fetch("http://localhost:8081/api/productos")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -26,8 +26,10 @@ const Menu = () => {
   }, []);
 
   const agregarAlCarrito = (producto) => {
+    // localStorage.clear()
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.push({ ...producto, cantidad: 1 });
+    carrito.push(producto['id']);
+    console.log(carrito);
     localStorage.setItem('carrito', JSON.stringify(carrito));
     alert(`${producto.nombre} agregado al carrito`);
 };

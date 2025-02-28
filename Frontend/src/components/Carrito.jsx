@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/style.css';
 import '../assets/css/style-carro.css';
@@ -9,13 +9,13 @@ const Carrito = () => {
     const shippingCost = 3.00;
 
     useEffect(() => {
-        recuperarItems();
+        recuperarItems()
     }, []);
 
     async function recuperarItems() {
         const carritoItems = JSON.parse(localStorage.getItem('carrito')) || [];
         try {
-            const response = await fetch('http://localhost:8080/api/carrito', {
+            const response = await fetch('http://localhost:8081/api/carrito', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -16,24 +16,6 @@
 Este sistema tiene como objetivo integrar y mejorar la gestión de pedidos en las cafeterías con mayor demanda de la **Universidad Nacional Mayor de San Marcos (UNMSM)**.  
 Se busca optimizar la experiencia del usuario, reducir tiempos de espera y facilitar el acceso a productos mediante una plataforma eficiente y escalable.  
 
-# FUNCIONALIDADES PRINCIPALES
-
-## PÁGINA PRINCIPAL
-![image](https://github.com/user-attachments/assets/cf2b6ecf-edd1-4094-bf7c-babb5fd47f0d)
-
-## MENÚ DEL DÍA 
-![image](https://github.com/user-attachments/assets/9c298064-b217-407f-be4f-827277d9c455)
-
-## LOGIN
-![image](https://github.com/user-attachments/assets/bbbf1745-b785-4a15-b39e-15f565746ddb)
-
-## PANEL DEL ADMINISTRADOR
-![image](https://github.com/user-attachments/assets/b42ecbb7-1e6a-4648-96c1-8da8dcf5b664)
-
-## CARRITO DE COMPRAS
-![image](https://github.com/user-attachments/assets/cf7ae113-9ad0-428b-9fd4-f7d93d2d514d)
-
-
 ## 🏗️ Vista General de la Arquitectura  
 A continuación, se presenta la arquitectura general del sistema:  
 
@@ -87,9 +69,7 @@ Ejemplo de prueba unitaria con JUnit:
 
 Pruebas APIs Postman
 
-![image](https://github.com/user-attachments/assets/4083f71c-425a-4ea6-8fd3-f4276710cc87)
-
-![image](https://github.com/user-attachments/assets/4ab186c2-e527-4545-a73c-ba514eb9564a)
+![image](https://github.com/user-attachments/assets/ed661f56-8db8-400a-845e-1eef53e6a151)
 
  - Gestion de Productos
 

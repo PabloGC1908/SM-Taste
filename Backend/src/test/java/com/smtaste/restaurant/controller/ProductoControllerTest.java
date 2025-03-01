@@ -33,6 +33,9 @@ class ProductoControllerTest {
     @MockBean
     private ProductoService productoService;
 
+    private static final String PIZZA = "Pizza";
+    private static final String PIZZA_ACTUALIZADA = "Pizza Actualizada";
+
     @BeforeEach
     void setUp() {
         // Aquí no es necesario MockitoAnnotations.openMocks(this), porque Spring Boot ya maneja la inyección
@@ -42,7 +45,7 @@ class ProductoControllerTest {
     @Test
     void testGetProductos() throws Exception {
         ProductoMenuResponse productoResponse = new ProductoMenuResponse(
-                1, "Pizza", "http://example.com/pizza.jpg",
+                1, PIZZA, "http://example.com/pizza.jpg",
                 "Deliciosa pizza de queso", 10, 12.99f
         );
 
@@ -54,7 +57,7 @@ class ProductoControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].nombre", is("Pizza")));
+                .andExpect(jsonPath("$[0].nombre", is(PIZZA)));
 
         verify(productoService, times(1)).findAllProductosMenu();
     }
@@ -63,7 +66,7 @@ class ProductoControllerTest {
     void testAddProducto() throws Exception {
         Producto producto = new Producto();
         producto.setId(1);
-        producto.setNombre("Pizza");
+        producto.setNombre(PIZZA);
     
         when(productoService.saveProducto(any(ProductoMenuResponse.class))).thenReturn(producto);
 
@@ -72,7 +75,7 @@ class ProductoControllerTest {
                         .content("{\"nombre\":\"Pizza\", \"descripcion\":\"Deliciosa pizza\", \"precio\": 12.99, \"cantidad\": 10, \"url_foto\":\"http://example.com/pizza.jpg\"}"))
                 .andExpect(status().isCreated())  // Expect 201 Created
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.nombre", is("Pizza")));
+                .andExpect(jsonPath("$.nombre", is(PIZZA)));
     
         verify(productoService, times(1)).saveProducto(any(ProductoMenuResponse.class));
     }
@@ -83,10 +86,10 @@ class ProductoControllerTest {
     void testUpdateProducto() throws Exception {
         Producto producto = new Producto();
         producto.setId(1);
-        producto.setNombre("Pizza Actualizada");
+        producto.setNombre(PIZZA_ACTUALIZADA);
     
         ProductoMenuResponse productoDetails = new ProductoMenuResponse(
-                1, "Pizza Actualizada", "http://example.com/pizza-updated.jpg",
+                1, PIZZA_ACTUALIZADA, "http://example.com/pizza-updated.jpg",
                 "Pizza con ingredientes nuevos", 15, 14.99f
         );
     
@@ -97,7 +100,7 @@ class ProductoControllerTest {
                         .content("{\"nombre\":\"Pizza Actualizada\", \"descripcion\":\"Pizza con ingredientes nuevos\", \"precio\": 14.99, \"cantidad\": 15, \"url_foto\":\"http://example.com/pizza-updated.jpg\"}"))
                 .andExpect(status().isOk())  // Expect 200 OK for successful update
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.nombre", is("Pizza Actualizada")));
+                .andExpect(jsonPath("$.nombre", is(PIZZA_ACTUALIZADA)));
     
         verify(productoService, times(1)).updateProducto(anyLong(), any(ProductoMenuResponse.class));
     }

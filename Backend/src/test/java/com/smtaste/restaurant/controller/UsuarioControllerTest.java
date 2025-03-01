@@ -25,6 +25,8 @@ public class UsuarioControllerTest {
     @InjectMocks
     private UsuarioController usuarioController;
 
+    private static final String USUARIO_TEST = "usuarioTest";
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -33,7 +35,7 @@ public class UsuarioControllerTest {
     @Test
     void testGetUsernameByLoginUserNotFound() {
         // Configuración de AuthRequest de prueba
-        AuthRequest authRequest = new AuthRequest("usuarioTest", "passwordTest");
+        AuthRequest authRequest = new AuthRequest(USUARIO_TEST, "passwordTest");
 
         // Mockeo del servicio para simular que no se encuentra el usuario
         when(usuarioService.getUsuario(any(AuthRequest.class))).thenReturn(null);
@@ -49,16 +51,16 @@ public class UsuarioControllerTest {
     @Test
     void testGetUsernameByLoginUserFound() {
         // Configuración de AuthRequest de prueba
-        AuthRequest authRequest = new AuthRequest("usuarioTest", "passwordTest");
+        AuthRequest authRequest = new AuthRequest(USUARIO_TEST, "passwordTest");
 
         // Mockeo del servicio para devolver el nombre de usuario
-        when(usuarioService.getUsuario(any(AuthRequest.class))).thenReturn("usuarioTest");
+        when(usuarioService.getUsuario(any(AuthRequest.class))).thenReturn(USUARIO_TEST);
 
         // Realizar la solicitud y obtener la respuesta
         ResponseEntity<Map<String, String>> response = usuarioController.getUsernameByLogin(authRequest);
 
         // Verificar el código de estado y el nombre de usuario
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("usuarioTest", response.getBody().get("user"));
+        assertEquals(USUARIO_TEST, response.getBody().get("user"));
     }
 }

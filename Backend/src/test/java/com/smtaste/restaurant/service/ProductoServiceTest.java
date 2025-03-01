@@ -30,6 +30,8 @@ public class ProductoServiceTest {
     @InjectMocks
     private ProductoService productoService;
 
+    private static final String NUEVO_PRODUCTO = "Nuevo Producto";
+
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
@@ -72,17 +74,17 @@ public class ProductoServiceTest {
     @Test
     void testSaveProducto() {
         ProductoMenuResponse productoMenuResponse = new ProductoMenuResponse(
-                1, "Nuevo Producto", "Desc", "url1", 10, 50.0f);
+                1, NUEVO_PRODUCTO, "Desc", "url1", 10, 50.0f);
 
         Producto productoGuardado = new Producto();
         productoGuardado.setId(1);
-        productoGuardado.setNombre("Nuevo Producto");
+        productoGuardado.setNombre(NUEVO_PRODUCTO);
 
         when(productoRepository.save(any(Producto.class))).thenReturn(productoGuardado);
 
         Producto result = productoService.saveProducto(productoMenuResponse);
 
-        assertEquals("Nuevo Producto", result.getNombre());
+        assertEquals(NUEVO_PRODUCTO, result.getNombre());
         verify(productoRepository, times(1)).save(any(Producto.class));
     }
 

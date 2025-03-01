@@ -16,6 +16,7 @@ import java.util.Optional;
 @RequestMapping("/api/login")
 public class AuthController {
     private final UsuarioRepository usuarioRepository;
+    private static final String MESSAGE_KEY = "message";
 
     public AuthController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -29,13 +30,13 @@ public class AuthController {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             if (usuario.getContrasena().equals(authRequest.contrasena())) {
-                response.put("message", "Login successful");
+                response.put(MESSAGE_KEY, "Login successful");
                 response.put("user", usuario.getNombre());
             } else {
-                response.put("message", "Invalid password");
+                response.put(MESSAGE_KEY, "Invalid password");
             }
         } else {
-            response.put("message", "User not found");
+            response.put(MESSAGE_KEY, "User not found");
         }
 
         return response;

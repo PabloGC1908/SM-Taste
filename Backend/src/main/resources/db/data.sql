@@ -12,4 +12,6 @@ INSERT INTO producto (id, nombre, url_foto, descripcion, categoria, cantidad, id
       (7, 'Bebidas frutales', 'images/menu-7.jpg', 'Una bebida helada a base, principalmente, de jugos frutales mezclados con agua o leche.', 'Bebida', 1, 2, 10),
       (8, 'Ensalada de frutas', 'images/menu-8.jpg', 'Postre frío elaborado con frutas frescas aromatizadas con jarabe perfumado y chocolate.', 'Postre', 1, 2, 13.90);
 
+INSERT INTO usuario (id, apellido, contrasena, email, nombre, rol) VALUES
+        (1, 'admin', '12345', 'admin@gmail.com', 'admin', 0);
 

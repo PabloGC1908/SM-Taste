@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  title: PruebasAPI
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost
+paths:
+  /api/carrito:
+    post:
+      tags:
+        - GestionProductos
+      summary: Obtener productos del carrito
+      description: Obtener productos del carrito
+      operationId: obtenerProductosDelCarrito
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                example: '1'
+              example:
+                - '1'
+                - '2'
+                - '3'
+            example:
+              - '1'
+              - '2'
+              - '3'
+      responses:
+        '200':
+          description: ''
+  /api/productos:
+    get:
+      tags:
+        - GestionProductos
+      summary: Obtener todos los productos
+      description: Obtener todos los productos
+      operationId: obtenerTodosLosProductos
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - GestionProductos
+      summary: Agregar un producto
+      description: Agregar un producto
+      operationId: agregarUnProducto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cantidad:
+                  type: number
+                  example: 10
+                descripcion:
+                  type: string
+                  example: Pizza con tomate, mozzarella y albahaca
+                nombre:
+                  type: string
+                  example: Pizza Margarita
+                precio:
+                  type: number
+                  example: 25.9
+            example:
+              cantidad: 10
+              descripcion: Pizza con tomate, mozzarella y albahaca
+              nombre: Pizza Margarita
+              precio: 25.9
+      responses:
+        '200':
+          description: ''
+  /api/productos/1:
+    put:
+      tags:
+        - GestionProductos
+      summary: Actualizar un producto
+      description: Actualizar un producto
+      operationId: actualizarUnProducto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cantidad:
+                  type: number
+                  example: 10
+                descripcion:
+                  type: string
+                  example: >-
+                    Pizza familiar con todas las carnes. Queso mozzarella, carne
+                    de res, pepperoni, salchicha de cerdo, tocino y jamón.
+                nombre:
+                  type: string
+                  example: Pizza de Pepperoni
+                precio:
+                  type: number
+                  example: 25.9
+                urlImagen:
+                  type: string
+                  example: images/menu-1.jpg
+            example:
+              cantidad: 10
+              descripcion: >-
+                Pizza familiar con todas las carnes. Queso mozzarella, carne de
+                res, pepperoni, salchicha de cerdo, tocino y jamón.
+              nombre: Pizza de Pepperoni
+              precio: 25.9
+              urlImagen: images/menu-1.jpg
+      responses:
+        '200':
+          description: ''
+  /api/productos/7:
+    delete:
+      tags:
+        - GestionProductos
+      summary: Eliminar un producto
+      description: Eliminar un producto
+      operationId: eliminarUnProducto
+      responses:
+        '200':
+          description: ''
+  /api/usuarios/login:
+    post:
+      tags:
+        - GestionUsuarios
+      summary: Usuario incorrecto
+      description: Usuario incorrecto
+      operationId: usuarioIncorrecto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contrasena:
+                  type: string
+                  example: '12346'
+                email:
+                  type: string
+                  example: admin@gmail.com
+            example:
+              contrasena: '12346'
+              email: admin@gmail.com
+      responses:
+        '200':
+          description: ''
+tags:
+  - name: GestionProductos
+  - name: GestionUsuarios

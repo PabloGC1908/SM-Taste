@@ -15,7 +15,7 @@ const Carrito = () => {
     async function recuperarItems() {
         const carritoItems = JSON.parse(localStorage.getItem('carrito')) || [];
         try {
-            const response = await fetch('http://localhost:8081/api/carrito', {
+            const response = await fetch('http://localhost:8080/api/carrito', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,14 +54,33 @@ const Carrito = () => {
         );
         setCartItems([...newCartItems]); // Genera un nuevo array para actualizar el estado
         calcularTotal(newCartItems);
-        localStorage.setItem('carrito', JSON.stringify(newCartItems));
+        const formattedCart = newCartItems.map(item => ({
+            id: item.id,
+            nombre: item.nombre,
+            descripcion: item.descripcion,
+            precio: parseFloat(item.precio), // Asegurar que es número
+            cantidad: parseInt(item.cantidad) || 1, // Asegurar cantidad válida
+            urlImagen: item.urlImagen
+        }));
+        
+        localStorage.setItem('carrito', JSON.stringify(formattedCart));
     };
 
     const eliminarItem = (id) => {
         const newCartItems = cartItems.filter(item => item.id !== id);
         setCartItems([...newCartItems]); // Genera un nuevo array para actualizar el estado
         calcularTotal(newCartItems);
-        localStorage.setItem('carrito', JSON.stringify(newCartItems));
+        const formattedCart = newCartItems.map(item => ({
+            id: item.id,
+            nombre: item.nombre,
+            descripcion: item.descripcion,
+            precio: parseFloat(item.precio), 
+            cantidad: parseInt(item.cantidad) || 1, 
+            urlImagen: item.urlImagen
+        }));
+        
+        localStorage.setItem('carrito', JSON.stringify(formattedCart));
+        
     };
 
     return (

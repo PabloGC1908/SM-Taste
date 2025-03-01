@@ -7,7 +7,7 @@ const Menu = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/productos")
+    fetch("http://localhost:8080/api/productos")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");

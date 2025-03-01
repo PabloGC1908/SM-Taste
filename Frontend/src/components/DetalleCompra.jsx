@@ -29,7 +29,7 @@ const DetalleCompra = () => {
 
     useEffect(() => {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        const totalProductCost = carrito.reduce((total, item) => total + item.price * item.quantity, 0);
+        const totalProductCost = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
         const totalCost = totalProductCost + orderDetails.shippingCost;
 
         setOrderDetails(prevState => ({

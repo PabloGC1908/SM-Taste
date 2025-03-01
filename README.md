@@ -73,13 +73,11 @@ Pruebas APIs Postman
 
  - Gestion de Productos
 
-![image](https://github.com/user-attachments/assets/d89de255-5e58-4ff9-987c-5e45b5120e84)
-
-![image](https://github.com/user-attachments/assets/b6131f48-7aae-4d50-8bb8-1a4f704ddd00)
+![image](https://github.com/user-attachments/assets/cc19d315-a9fb-4544-bc39-e885d2ba081d)
 
   - Gestion de Usuarios
 
-![image](https://github.com/user-attachments/assets/1ce4327a-648c-452a-9733-c353acf75bed)
+![image](https://github.com/user-attachments/assets/c7127664-9315-4d99-9a30-8c16e3c29d5b)
 
 ## Pipeline de CI/CD en Jenkins
 El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
@@ -89,14 +87,15 @@ El proyecto implementa un pipeline de CI/CD con las siguientes etapas:
   
 - Pruebas Unitarias: Ejecución de pruebas con JUnit.
 
-- Pruebas de APIs: Verificación de endpoints REST con herramientas automatizadas.
+- Pruebas de APIs: Verificación de endpoints REST.
 
 ## CONFIGURACIÓN DEL PIPELINE EN JENKINS
-El siguiente es un Jenkinsfile que define el pipeline del proyecto. Este archivo automatiza varias etapas del proceso de integración continua, que incluyen la construcción del proyecto, la ejecución de pruebas y la implementación de medidas de seguridad y rendimiento.
+El siguiente es un Jenkinsfile que define el pipeline del proyecto. Este archivo automatiza varias etapas del proceso de integración continua, que incluyen la construcción del proyecto, la ejecución de pruebas.
 
 
+    pipeline {
     agent any
-
+    
     tools {
         jdk 'JAVA'
         maven 'maven'
@@ -125,33 +124,28 @@ El siguiente es un Jenkinsfile que define el pipeline del proyecto. Este archivo
             }
         }
         
-        stage("Prueba API - Productos") {
+        stage("Prueba API") {
             steps {
                 script {
                     bat "npm install -g newman"  
-                    bat "newman run Backend/src/test/PruebasAPI/GestionProductos.json"
+                    bat "newman run Backend/src/test/PruebasAPI/PruebasAPI.json"
                 }
             }
         }
 
-        stage("Prueba API - Usuarios") {
-            steps {
-                bat "newman run Backend/src/test/PruebasAPI/GestionUsuarios.json"
-            }
-        }
-        
         stage("SonarQube Analysis ") {
             steps {
                 bat "$SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://localhost:9000/ \
-                -Dsonar.login=sqp_bf41f219d26aff4d501bcfe1870605897b117b45 \
-                -Dsonar.projectKey=Proyecto_TallerWeb \
-                -Dsonar.projectName=Proyecto_TallerWeb \
+                -Dsonar.login=sqp_9f881e85ad6202f6aac7ca9523bb1312bc603cfe \
+                -Dsonar.projectKey=Proyecto_TallerWeb1 \
+                -Dsonar.projectName=Proyecto_TallerWeb1 \
                 -Dsonar.sources=. \
                 -Dsonar.java.binaries=. "
                 }
             }
         
     } // End of stages
+} // End of pipeline
 
 1. Definición del Pipeline
 
@@ -194,20 +188,14 @@ El código define diferentes stages (etapas) para gestionar el ciclo de vida del
 - Ejecuta:
     - mvn clean test: Limpia archivos temporales y ejecuta pruebas unitarias con Maven
  
-4.3. Pruebas de API - Productos
+4.3. Pruebas de API 
 
 ![image](https://github.com/user-attachments/assets/278a3ee4-f328-4fbf-991d-f19fc2e989ae)
 
 - Instala Newman (npm install -g newman), una herramienta para ejecutar pruebas de Postman.
-- Ejecuta pruebas de API para productos con el archivo JSON de pruebas.
+- Ejecuta pruebas de API con el archivo JSON de pruebas.
 
-4.4. Pruebas de API - Usuarios
-
-![image](https://github.com/user-attachments/assets/bfec89b2-5dec-4568-a918-42f3825e7be4)
-
-Ejecuta pruebas de API para usuarios usando Newman.
-
-4.5. Análisis de Código con SonarQube
+4.4. Análisis de Código con SonarQube
 
 ![image](https://github.com/user-attachments/assets/b5e556c7-6287-4e79-ba05-70f31c2cdbaf)
 
@@ -223,5 +211,6 @@ En resumen este pipeline en Jenkins automatiza los siguientes pasos:
 - Ejecuta pruebas de API usando Newman.
 - Analiza el código con SonarQube.
     
-![image](https://github.com/user-attachments/assets/1a175a1e-abaa-4d83-80af-8e9cb9f2af89)
+![image](https://github.com/user-attachments/assets/2d410f9f-0cc9-4ddb-92a6-64dd64c9ae89)
+
 

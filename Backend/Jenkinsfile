@@ -1,0 +1,52 @@
+pipeline {
+agent any
+
+tools {
+    jdk 'JAVA'
+    maven 'maven'
+    nodejs 'NodeJS'
+}
+
+environment {
+    SCANNER_HOME = tool 'sonar-scanner'
+}
+
+stages {
+    stage("Checkout Código") {
+        steps {
+            git branch: 'master',
+                changelog: false,
+                poll: false,
+                url: 'https://github.com/PabloGC1908/SM-Taste.git'
+        }
+    }
+
+    stage("Build y Pruebas Unitarias") {
+        steps {
+            dir('Backend') {
+                bat "mvn clean test"
+            }
+        }
+    }
+
+    stage("Prueba API") {
+        steps {
+            script {
+                bat "npm install -g newman"
+                bat "newman run Backend/src/test/PruebasAPI/PruebasAPI.json"
+            }
+        }
+    }
+
+    stage("SonarQube Analysis ") {
+        steps {
+            bat "$SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://localhost:9000/ \
+            -Dsonar.login=sqp_9f881e85ad6202f6aac7ca9523bb1312bc603cfe \
+            -Dsonar.projectKey=Proyecto_TallerWeb1 \
+            -Dsonar.projectName=Proyecto_TallerWeb1 \
+            -Dsonar.sources=. \
+            -Dsonar.java.binaries=. "
+            }
+        }
+
+} // End of stages

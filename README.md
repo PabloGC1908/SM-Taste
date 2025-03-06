@@ -54,6 +54,7 @@ El proyecto sigue buenas prácticas de desarrollo para garantizar calidad y mant
 - Análisis Estático: Integración de herramientas como SonarQube para identificar problemas en el código.
 
   ![image](https://github.com/user-attachments/assets/c4fc0cef-c995-4d59-8074-4081d3a190a9)
+  ![image](https://github.com/user-attachments/assets/fe58924f-eef6-469d-825a-a12d6bac2b9d)
 
 - Pruebas Unitarias: Implementación de pruebas con JUnit.
 

@@ -1,16 +1,12 @@
 # Sistema de Integración de Cafeterías con Mayor Demanda de la UNMSM  
 
-## 📌 Curso: Taller de Construcción de Software Web  
+## 📌 Curso: GESTION DE MANTENIMIENTO DE SOFTWARE
 
 ## 👨‍💻 Autores  
-- **Fredy Anthony Huerta Firma**  
-- **Leonardo David Baca Carretero**  
-- **Triveño Ruffner Daniel**  
-- **Joseph Rodolfo Flores Hilario**  
-- **Jhon Bryan Gonzalez Villalobos**  
-- **Pablo Francisco Guerra Camana**  
-- **Leonardo Franco Ormeño Vasquez**  
-- **Germán Callupe Huamán**
+- **Huerta Firma Fredy Anthony**  
+- **Romero Llamoca Carlos Antonio**  
+- **Flores Hilario Joseph Rodolfo**  
+- **Cancio Bedon Alex**  
 
 ## 🎯 Propósito del Proyecto  
 Este sistema tiene como objetivo integrar y mejorar la gestión de pedidos en las cafeterías con mayor demanda de la **Universidad Nacional Mayor de San Marcos (UNMSM)**.  
